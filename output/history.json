@@ -13,7 +13,7 @@
     {
       "id": "short-01",
       "title": "Don't Upload YouTube Thumbnails Before Checking This #Shorts",
-      "thumb": "DON'T UPLOAD YET ⚠️",
+      "thumb": "DON'T UPLOAD YET \u26a0\ufe0f",
       "pillar": "coding_agents",
       "format": "short",
       "video_id": "q8gXzDksX4M",
@@ -29,6 +29,15 @@
       "video_id": "6hbMr5p3Bng",
       "date": "2026-10-24",
       "status": "uploaded"
+    },
+    {
+      "id": "release-ollama-ollama-v0.40.10",
+      "title": "ollama Just Dropped v0.40.10 (What Broke)",
+      "thumb": "DON'T UPDATE YET?",
+      "pillar": "breaking_news",
+      "format": "short",
+      "date": "2026-10-24",
+      "status": "approved_and_uploaded"
     }
   ]
 }
