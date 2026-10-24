@@ -28,18 +28,21 @@ def load_telegram_credentials(cred_path: str = "credentials/telegram.json"):
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
 
     if not token or not chat_id:
-        if os.path.exists(cred_path):
-            with open(cred_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                token = token or data.get("bot_token")
-                chat_id = chat_id or data.get("chat_id")
+        if os.path.exists(cred_path) and os.path.getsize(cred_path) > 0:
+            try:
+                with open(cred_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    token = token or data.get("bot_token")
+                    chat_id = chat_id or data.get("chat_id")
+            except Exception as e:
+                print(f"⚠️ Warning: Failed to parse {cred_path}: {e}")
 
     if not token or not chat_id:
-        print("❌ Error: Telegram credentials not found.")
-        print("Provide credentials/telegram.json or set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID.")
+        print("❌ Error: Telegram credentials missing or empty.")
+        print("Ensure TELEGRAM_JSON secret (or TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID) is set in GitHub repository secrets.")
         sys.exit(1)
 
-    return token, str(chat_id)
+    return str(token), str(chat_id)
 
 def send_telegram_message(token: str, chat_id: str, text: str, reply_markup=None):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
