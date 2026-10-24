@@ -23,6 +23,7 @@ import subprocess
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from topic_engine import select_next_topic
 from telegram_reviewer import review_and_gate
 

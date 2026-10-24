@@ -114,9 +114,11 @@ def upload_to_youtube(video_path: str, title: str, description: str, thumbnail: 
 
     return res.returncode == 0, watch_url, studio_url
 
-def wait_for_decision(token: str, chat_id: str, action_key: str, poll_timeout: int = 86400):
+def wait_for_decision(token: str, chat_id: str, action_key: str, poll_timeout: int = None):
     """Poll for callback query from inline buttons."""
-    print("⏳ Waiting for your decision on Telegram phone app...")
+    if poll_timeout is None:
+        poll_timeout = int(os.environ.get("REVIEW_TIMEOUT_SECONDS", 7200))
+    print(f"⏳ Waiting for your decision on Telegram phone app (timeout: {poll_timeout}s)...")
     start_time = time.time()
     last_update_id = 0
 
