@@ -77,4 +77,4 @@ git push origin main
 ---
 
 ## Daily Schedule
-The workflow runs automatically every day at **10:00 AM UTC** (**3:30 PM IST**). You can adjust the schedule in `.github/workflows/daily-publish.yml` under `cron`.
+The workflow runs automatically every day at **08:00 AM UTC** (**1:30 PM IST**). You can adjust the schedule in `.github/workflows/daily-publish.yml` under `cron`.

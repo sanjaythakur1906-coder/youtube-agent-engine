@@ -2,8 +2,8 @@ name: Daily Autonomous YouTube Publishing Engine
 
 on:
   schedule:
-    # Runs daily at 10:00 AM UTC (3:30 PM IST)
-    - cron: '0 10 * * *'
+    # Runs daily at 08:00 AM UTC (1:30 PM IST)
+    - cron: '0 8 * * *'
   workflow_dispatch:
     inputs:
       format:
