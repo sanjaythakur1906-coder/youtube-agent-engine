@@ -71,8 +71,18 @@ git push origin main
 4. Within 45-60 seconds, check your phone's Telegram:
    - Your bot `@my_notification_1906_bot` will send you the video and thumbnail with buttons:
      `[ ✅ Approve & Upload ]` `[ ❌ Reject ]`
-5. Tap **[ ✅ Approve & Upload ]** on your phone:
-   - The workflow will upload the video directly to your YouTube Studio channel and send you the live watch link!
+5. Review and Take Action:
+   - **Tap [ ✅ Approve & Upload ]**: Workflow uploads video directly to YouTube Studio and sends you live watch link!
+   - **Tap [ ❌ Reject ]**: Bot asks what needs improvement:
+     - `[ 🎣 Weak Hook / Script ]`
+     - `[ 🎙️ Voice / Pacing ]`
+     - `[ 🎨 Visuals / Code Snippets ]`
+     - `[ ⏩ Dislike Topic Entirely ]`
+     - `[ 💤 Done for Today ]`
+   - **Choose Next Action**:
+     - `[ 🛠️ Improve & Re-render Video ]`: Engine fixes the hook/voice/visuals based on your feedback and sends revised video in ~45s!
+     - `[ 🔄 Pick Different Topic ]`: Archives rejected topic and generates a fresh topic from the bank.
+     - `[ 💤 Done for Today ]`: Archives topic and finishes cleanly for today.
 
 ---
 

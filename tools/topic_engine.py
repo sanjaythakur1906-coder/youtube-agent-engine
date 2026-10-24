@@ -89,7 +89,9 @@ def get_used_topic_ids(history_path: str = "output/history.json") -> set:
     try:
         with open(history_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            return {item.get("id") for item in data.get("published_videos", [])}
+            published = {item.get("id") for item in data.get("published_videos", [])}
+            rejected = {item.get("id") for item in data.get("rejected_videos", [])}
+            return published | rejected
     except Exception:
         return set()
 

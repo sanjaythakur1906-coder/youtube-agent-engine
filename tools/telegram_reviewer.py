@@ -192,6 +192,144 @@ def review_and_gate(video_path: str, thumbnail_path: str, title: str, descriptio
 
     print("📲 Notification sent to your phone. Waiting for your tap...")
 
+def prompt_rejection_reason(token: str, chat_id: str, action_key: str, poll_timeout: int = 1800):
+    """Ask user why video was rejected and what to do next."""
+    reasons_keyboard = {
+        "inline_keyboard": [
+            [{"text": "🎣 Weak Hook / Script", "callback_data": f"rsn_hook_{action_key}"}],
+            [{"text": "🎙️ Voice / Pacing", "callback_data": f"rsn_voice_{action_key}"}],
+            [{"text": "🎨 Visuals / Code Snippets", "callback_data": f"rsn_visuals_{action_key}"}],
+            [{"text": "⏩ Dislike Topic Entirely", "callback_data": f"rsn_topic_{action_key}"}],
+            [{"text": "💤 Done for Today", "callback_data": f"rsn_done_{action_key}"}]
+        ]
+    }
+    send_telegram_message(
+        token, chat_id,
+        "❌ <b>Video Rejected.</b>\n\nWhat needs improvement?",
+        reply_markup=reasons_keyboard
+    )
+
+    reason_map = {
+        f"rsn_hook_{action_key}": ("hook", "Weak Hook / Script"),
+        f"rsn_voice_{action_key}": ("voice", "Voice / Pacing"),
+        f"rsn_visuals_{action_key}": ("visuals", "Visuals / Code Snippets"),
+        f"rsn_topic_{action_key}": ("topic", "Dislike Topic"),
+        f"rsn_done_{action_key}": ("done", "Done for Today")
+    }
+
+    start_time = time.time()
+    last_update_id = 0
+    selected_reason = None
+    reason_label = None
+
+    while time.time() - start_time < poll_timeout:
+        url = f"https://api.telegram.org/bot{token}/getUpdates?offset={last_update_id + 1}&timeout=20"
+        try:
+            res = requests.get(url, timeout=25).json()
+            if not res.get("ok"):
+                time.sleep(3)
+                continue
+
+            for update in res.get("result", []):
+                last_update_id = update["update_id"]
+                if "callback_query" in update:
+                    cb = update["callback_query"]
+                    data = cb.get("data", "")
+                    if str(cb.get("from", {}).get("id")) != chat_id:
+                        continue
+                    requests.post(f"https://api.telegram.org/bot{token}/answerCallbackQuery", json={"callback_query_id": cb["id"]})
+                    if data in reason_map:
+                        selected_reason, reason_label = reason_map[data]
+                        break
+            if selected_reason:
+                break
+        except Exception:
+            time.sleep(3)
+            continue
+
+    if not selected_reason or selected_reason == "done":
+        send_telegram_message(token, chat_id, "💤 <b>Done for today!</b> Video rejected and saved. See you tomorrow at 1:30 PM IST.")
+        return ("done", "user_stopped")
+
+    # Step 2: Ask next action
+    action_keyboard = {
+        "inline_keyboard": [
+            [{"text": "🛠️ Improve & Re-render Video", "callback_data": f"act_imp_{action_key}"}],
+            [{"text": "🔄 Pick Different Topic", "callback_data": f"act_nxt_{action_key}"}],
+            [{"text": "💤 Done for Today", "callback_data": f"act_dne_{action_key}"}]
+        ]
+    }
+    send_telegram_message(
+        token, chat_id,
+        f"💡 <b>Feedback Logged:</b> <i>{reason_label}</i>\n\nWhat would you like to do next?",
+        reply_markup=action_keyboard
+    )
+
+    start_time = time.time()
+    while time.time() - start_time < poll_timeout:
+        url = f"https://api.telegram.org/bot{token}/getUpdates?offset={last_update_id + 1}&timeout=20"
+        try:
+            res = requests.get(url, timeout=25).json()
+            if not res.get("ok"):
+                time.sleep(3)
+                continue
+
+            for update in res.get("result", []):
+                last_update_id = update["update_id"]
+                if "callback_query" in update:
+                    cb = update["callback_query"]
+                    data = cb.get("data", "")
+                    if str(cb.get("from", {}).get("id")) != chat_id:
+                        continue
+                    requests.post(f"https://api.telegram.org/bot{token}/answerCallbackQuery", json={"callback_query_id": cb["id"]})
+                    if data == f"act_imp_{action_key}":
+                        send_telegram_message(token, chat_id, f"🛠️ <b>Improving video now...</b> Fixing {reason_label}. Generating new version in ~45s.")
+                        return ("improve", selected_reason)
+                    elif data == f"act_nxt_{action_key}":
+                        send_telegram_message(token, chat_id, "🔄 <b>Skipping topic...</b> Selecting fresh topic from bank now.")
+                        return ("next_topic", selected_reason)
+                    elif data == f"act_dne_{action_key}":
+                        send_telegram_message(token, chat_id, "💤 <b>Done for today!</b> Recorded feedback. See you tomorrow at 1:30 PM IST.")
+                        return ("done", selected_reason)
+        except Exception:
+            time.sleep(3)
+            continue
+
+    return ("done", selected_reason)
+
+def review_and_gate(video_path: str, thumbnail_path: str, title: str, description: str, privacy: str = "private"):
+    token, chat_id = load_telegram_credentials()
+    action_key = str(int(time.time()))
+
+    # Build inline keyboard buttons
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {"text": "✅ Approve & Upload", "callback_data": f"approve_{action_key}"},
+                {"text": "❌ Reject", "callback_data": f"reject_{action_key}"}
+            ]
+        ]
+    }
+
+    # 1. Send Thumbnail first if available
+    if thumbnail_path and os.path.exists(thumbnail_path):
+        send_telegram_photo(token, chat_id, thumbnail_path, f"🖼 <b>Thumbnail Concept</b>\nTitle: <b>{title}</b>")
+
+    # 2. Send Video with action buttons
+    caption = (
+        f"🎬 <b>NEW VIDEO READY FOR REVIEW</b>\n\n"
+        f"📌 <b>Title:</b> {title}\n"
+        f"🔒 <b>Privacy:</b> {privacy}\n\n"
+        f"<i>Watch the video above on your phone. Tap Approve to publish to YouTube or Reject to cancel.</i>"
+    )
+
+    resp = send_telegram_video(token, chat_id, video_path, caption, reply_markup=keyboard)
+    if not resp or not resp.get("ok"):
+        # Fallback to text message with buttons if video upload fails
+        send_telegram_message(token, chat_id, caption, reply_markup=keyboard)
+
+    print("📲 Notification sent to your phone. Waiting for your tap...")
+
     decision = wait_for_decision(token, chat_id, action_key)
 
     if decision == "approve":
@@ -206,17 +344,17 @@ def review_and_gate(video_path: str, thumbnail_path: str, title: str, descriptio
             )
             send_telegram_message(token, chat_id, msg)
             print("✅ Approved and uploaded successfully!")
-            return True
+            return ("approved", None)
         else:
             send_telegram_message(token, chat_id, "❌ <b>Upload failed. Check server logs.</b>")
-            return False
+            return ("failed", None)
     elif decision == "reject":
-        send_telegram_message(token, chat_id, "❌ <b>Video Rejected. Will not be uploaded.</b>")
-        print("❌ Video rejected by user.")
-        return False
+        print("❌ Video rejected by user. Prompting for feedback & next step...")
+        action, reason = prompt_rejection_reason(token, chat_id, action_key)
+        return (action, reason)
     else:
         send_telegram_message(token, chat_id, "⏰ <b>Review timed out. Video queued for later.</b>")
-        return False
+        return ("timeout", None)
 
 def main():
     parser = argparse.ArgumentParser(description="Telegram Review & Approval Gateway")

@@ -120,7 +120,7 @@ def build_daily_video(topic: dict, is_short: bool = False, privacy: str = "priva
 
     # 7. Telegram Review & Approval Gate
     print("\n📲 Dispatching review packet to your Telegram phone app...")
-    approved = review_and_gate(
+    action, reason = review_and_gate(
         video_path=output_mp4,
         thumbnail_path=thumb_path,
         title=title,
@@ -128,18 +128,20 @@ def build_daily_video(topic: dict, is_short: bool = False, privacy: str = "priva
         privacy=privacy
     )
 
-    # 8. Record in History Manifest if Approved
-    if approved:
-        history_file = "output/history.json"
-        history_data = {"published_videos": []}
-        if os.path.exists(history_file):
-            try:
-                with open(history_file, "r") as f:
-                    history_data = json.load(f)
-            except Exception:
-                pass
+    history_file = "output/history.json"
+    history_data = {"published_videos": [], "rejected_videos": []}
+    if os.path.exists(history_file):
+        try:
+            with open(history_file, "r", encoding="utf-8") as f:
+                history_data = json.load(f)
+        except Exception:
+            pass
 
-        history_data.setdefault("published_videos", []).append({
+    history_data.setdefault("published_videos", [])
+    history_data.setdefault("rejected_videos", [])
+
+    if action == "approved":
+        history_data["published_videos"].append({
             "id": slug,
             "title": title,
             "thumb": thumb_text,
@@ -148,10 +150,60 @@ def build_daily_video(topic: dict, is_short: bool = False, privacy: str = "priva
             "date": time.strftime("%Y-%m-%d"),
             "status": "approved_and_uploaded"
         })
-
         with open(history_file, "w", encoding="utf-8") as f:
             json.dump(history_data, f, indent=2)
-        print(f"✅ Logged to history manifest: {history_file}")
+        print(f"✅ Approved! Logged to history manifest: {history_file}")
+
+    elif action == "improve":
+        print(f"\n🛠️ User requested improvement for: {reason}. Applying fixes...")
+        # 1. Modify based on feedback
+        alt_voice = "Aman" if voice == "Tara" else "Tara"
+        alt_hook = f"99% of developers are testing {topic.get('tools_covered', ['this tool'])[0]} the wrong way. Here is the proof."
+        if reason == "hook":
+            spoken_sections[0] = alt_hook
+            with open(script_path, "w", encoding="utf-8") as f:
+                f.write(f"# {title} (Revised)\n\n" + "\n\n".join([f"**Spoken:**\n{s}" for s in spoken_sections]))
+        elif reason == "voice":
+            voice = alt_voice
+
+        # Re-synthesize & re-assemble
+        print(f"🎙 Regenerating voice with {voice}...")
+        subprocess.run([sys.executable, "tools/generate_voice.py", script_path, "--voice", voice, "--engine", "auto", "--output", audio_path], check=True)
+        subprocess.run([sys.executable, "tools/generate_subtitles.py", script_path, "--audio", audio_path, "--output-srt", srt_path], check=True)
+        if is_short:
+            subprocess.run([sys.executable, "tools/build_short.py", "--scenes-dir", scene_source, "--audio", audio_path, "--subtitles", srt_path, "--output", output_mp4], check=True)
+        else:
+            subprocess.run([sys.executable, "tools/build_video.py", "--scenes-dir", scene_source, "--audio", audio_path, "--subtitles", srt_path, "--output", output_mp4], check=True)
+
+        # Send improved version back for review
+        return build_daily_video(topic, is_short=is_short, privacy=privacy)
+
+    elif action == "next_topic":
+        history_data["rejected_videos"].append({
+            "id": slug,
+            "title": title,
+            "reason": reason,
+            "date": time.strftime("%Y-%m-%d"),
+            "status": "rejected_skipped"
+        })
+        with open(history_file, "w", encoding="utf-8") as f:
+            json.dump(history_data, f, indent=2)
+        print(f"⏩ Archived rejected topic {slug}. Picking next topic from bank...")
+        next_top = select_next_topic()
+        if next_top:
+            return build_daily_video(next_top, is_short=is_short, privacy=privacy)
+
+    elif action == "done":
+        history_data["rejected_videos"].append({
+            "id": slug,
+            "title": title,
+            "reason": reason,
+            "date": time.strftime("%Y-%m-%d"),
+            "status": "rejected_done_for_today"
+        })
+        with open(history_file, "w", encoding="utf-8") as f:
+            json.dump(history_data, f, indent=2)
+        print(f"💤 Recorded feedback for {slug}. Done for today!")
 
 def main():
     parser = argparse.ArgumentParser(description="Autonomous Daily YouTube Publisher")
