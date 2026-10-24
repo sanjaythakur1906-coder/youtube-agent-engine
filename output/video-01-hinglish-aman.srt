@@ -1,0 +1,123 @@
+1
+00:00:00,500 --> 00:00:06,215
+Apne channel par 11 AI agents run karne se pehle, ye dekh lo ki 7 din me kya break hua.
+
+2
+00:00:06,315 --> 00:00:16,826
+Maine 11 open-source AI agent skills test kiye jo YouTube channel ka scriptwriting, hook scoring, title packaging aur edit cutting automatically sambhalte hain.
+
+3
+00:00:16,926 --> 00:00:27,765
+Aaj hum is poori video par in tools ko live test karenge, aur main aapko dikhaunga ki ye kahan ghanton ka time bachate hain aur kahan poori tarah fail ho jaate hain.
+
+4
+00:00:27,865 --> 00:00:35,157
+Zyadatar creators pehle title likhte hain, fir Photoshop khol kar wahi same words thumbnail par daal dete hain.
+
+5
+00:00:35,257 --> 00:00:38,739
+Isse click surface ka aadha space waste ho jaata hai.
+
+6
+00:00:38,839 --> 00:00:42,321
+Ye package linter do important rules check karta hai.
+
+7
+00:00:42,421 --> 00:00:48,202
+Ek mobile screen par character limit, aur doosra title aur thumbnail me duplicate words.
+
+8
+00:00:48,302 --> 00:00:52,637
+Jab maine normal generic title try kiya, toh isne reject kar diya.
+
+9
+00:00:52,737 --> 00:01:02,066
+Lekin jab humne likha: *"11 AI Agents Ran My Entire Channel"* aur thumbnail par text diya *"ZERO HUMANS?"*—toh iska score aaya 100 out of 100.
+
+10
+00:01:02,166 --> 00:01:06,436
+Ye rule force karta hai ki thumbnail wo bole jo title nahi bolta.
+
+11
+00:01:06,536 --> 00:01:08,704
+Doosra tool hai hookscore dot py.
+
+12
+00:01:08,804 --> 00:01:11,431
+Log sochte hain hook bas tukka hota hai.
+
+13
+00:01:11,531 --> 00:01:16,721
+Ye script aapke pehle 15 seconds ko 5 alag-alag parameters par score karti hai.
+
+14
+00:01:16,821 --> 00:01:23,390
+Agar main simple line likhun ki *"Maine AI ko channel ka control diya"*, toh score aata hai 41 WEAK.
+
+15
+00:01:23,490 --> 00:01:27,563
+Kyunki isme curiosity low hai aur viewer ko address nahi kiya.
+
+16
+00:01:27,663 --> 00:01:38,634
+Lekin jab humne hook change kiya: *"Apne channel par 11 AI agents run karne se pehle, ye dekh lo ki 7 din me kya break hua"*, toh score jump ho kar 74 STRONG ban gaya.
+
+17
+00:01:38,734 --> 00:01:42,938
+Ye tool camera on karne se pehle hi weak hook ko pakad leta hai.
+
+18
+00:01:43,038 --> 00:01:47,177
+Teesra pain point hai editing me dead air aur pauses cut karna.
+
+19
+00:01:47,277 --> 00:01:57,657
+Ye tool transcript file ko scan karta hai aur jahan bhi 800 millisecond se zyada ka pause ya retake hota hai, uski ek automated cut list bana kar de deta hai.
+
+20
+00:01:57,757 --> 00:02:02,421
+Is file ko aap seedha Premiere ya DaVinci Resolve me drop kar sakte ho.
+
+21
+00:02:02,521 --> 00:02:05,477
+Manual timeline scrub karne ki zaroorat nahi.
+
+22
+00:02:05,577 --> 00:02:07,745
+Lekin yahan sabse bada catch hai.
+
+23
+00:02:07,845 --> 00:02:11,327
+Ye agents channel ko 100% automated nahi chala sakte.
+
+24
+00:02:11,427 --> 00:02:17,799
+Agar aap inko strict voice profile nahi doge, toh ye wahi fake AI buzzwords repeat karne lagenge.
+
+25
+00:02:17,899 --> 00:02:19,804
+Human review hamesha chahiye.
+
+26
+00:02:19,904 --> 00:02:23,977
+Skills script likhengi, upload aur review aapko hi karna hoga.
+
+27
+00:02:24,077 --> 00:02:28,610
+Ye saari 11 skills aur python scripts 100% free aur open-source hain.
+
+28
+00:02:28,710 --> 00:02:31,863
+Koi paid API key ya signup ki zaroorat nahi hai.
+
+29
+00:02:31,963 --> 00:02:34,853
+GitHub link niche description me pinned hai.
+
+30
+00:02:34,953 --> 00:02:40,274
+Repo clone karo, apne agle video ka hook test karo, aur dekho kya score aata hai.
+
+31
+00:02:40,374 --> 00:02:41,553
+Video pasand aayi toh channel ko subscribe zaroor karna.

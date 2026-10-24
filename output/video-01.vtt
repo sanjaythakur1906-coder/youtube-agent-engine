@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.272
+Before you let 11 AI agents run your channel, look at what broke in 7 days.
+
+2
+00:00:05.372 --> 00:00:15.744
+I tested 11 open-source agent skills designed to handle scriptwriting, hook scoring, title packaging, and edit cuts—with zero manual intervention until publishing.
+
+3
+00:00:15.844 --> 00:00:25.579
+Today, we're testing the core three in real time on this exact video, and I’m showing you where they save hours versus where they completely hallucinate.
+
+4
+00:00:25.679 --> 00:00:31.788
+Most creators write a title, then open Photoshop and slap the exact same words on the thumbnail.
+
+5
+00:00:31.888 --> 00:00:34.179
+That wastes half your click surface.
+
+6
+00:00:34.279 --> 00:00:35.479
+Watch this.
+
+7
+00:00:35.579 --> 00:00:46.841
+The package tool runs a Python linter checking two specific rules: character truncation for mobile feeds under 40 characters, and duplicate words across the title and thumbnail.
+
+8
+00:00:46.941 --> 00:00:53.877
+When I tested a generic title: *"How AI Built My Entire YouTube Channel"*, it flagged it for vague buzzwords.
+
+9
+00:00:53.977 --> 00:01:02.503
+But when we changed it to: *"11 AI Agents Ran My Entire Channel"* with the thumbnail text *"ZERO HUMANS?"*—it scored a 100 out of 100.
+
+10
+00:01:02.603 --> 00:01:06.676
+It forces you to make the thumbnail say what the title does not.
+
+11
+00:01:06.776 --> 00:01:08.239
+Next is `hookscore.py`.
+
+12
+00:01:08.339 --> 00:01:11.266
+A lot of people think hooks are just gut feel.
+
+13
+00:01:11.366 --> 00:01:18.238
+This script scores the first 15 seconds against 74 calibrated short-form transcripts across five parameters.
+
+14
+00:01:18.338 --> 00:01:19.674
+Look at the terminal.
+
+15
+00:01:19.774 --> 00:01:26.774
+If I input: *"I gave AI full control of my channel and promised not to touch it"*, it scores a 41—marked WEAK.
+
+16
+00:01:26.874 --> 00:01:28.074
+Why?
+
+17
+00:01:28.174 --> 00:01:33.455
+Because the curiosity is dead and it doesn't speak to "you" in the first six words.
+
+18
+00:01:33.555 --> 00:01:41.954
+When we reframe it to: *"Before you let 11 AI agents run your channel, look at what broke in 7 days"*, the score jumps to 74 STRONG.
+
+19
+00:01:42.054 --> 00:01:48.290
+It forces concrete figures and personal stakes before you waste a single take recording on camera.
+
+20
+00:01:48.390 --> 00:01:56.980
+Here is where most creators lose 5 hours every weekend: scrubbing through an audio file cutting out 'ums', retakes, and awkward pauses.
+
+21
+00:01:57.080 --> 00:02:02.171
+Instead of doing that manually, the edit agent parses the raw `.srt` transcript.
+
+22
+00:02:02.271 --> 00:02:09.652
+It calculates silence thresholds over 800 milliseconds and flags repetitive sentences where you restarted a thought.
+
+23
+00:02:09.752 --> 00:02:16.051
+It outputs a cut list with exact timecodes that you drop straight into Premiere or DaVinci Resolve.
+
+24
+00:02:16.151 --> 00:02:17.615
+Now, here is the catch.
+
+25
+00:02:17.715 --> 00:02:21.342
+The agents cannot run your channel completely unattended.
+
+26
+00:02:21.442 --> 00:02:30.859
+If you don't feed them a strict `voice.md` profile, they revert right back to generic AI sludge—phrases like *"let's dive in"* and *"game-changer"*.
+
+27
+00:02:30.959 --> 00:02:36.749
+You still need human taste to kill the fluff, verify the numbers, and actually hit publish.
+
+28
+00:02:36.849 --> 00:02:38.049
+The skills write.
+
+29
+00:02:38.149 --> 00:02:39.349
+You upload.
+
+30
+00:02:39.449 --> 00:02:46.830
+All 11 skills and the 6 standalone Python scripts are 100% free, MIT licensed, with no API keys or signups required.
+
+31
+00:02:46.930 --> 00:02:51.257
+The GitHub link and setup instructions are in the description below.
+
+32
+00:02:51.357 --> 00:02:51.784
+Clone the repo, run the hook scorer on your next video, and see what it scores.

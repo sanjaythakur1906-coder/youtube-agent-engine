@@ -1,0 +1,34 @@
+{
+  "published_videos": [
+    {
+      "id": "video-01",
+      "title": "11 AI Agents Ran My Entire Channel",
+      "thumb": "ZERO HUMANS?",
+      "pillar": "coding_agents",
+      "format": "long",
+      "video_id": "Sij_i7jKCrY",
+      "date": "2026-10-24",
+      "status": "uploaded"
+    },
+    {
+      "id": "short-01",
+      "title": "Don't Upload YouTube Thumbnails Before Checking This #Shorts",
+      "thumb": "DON'T UPLOAD YET ⚠️",
+      "pillar": "coding_agents",
+      "format": "short",
+      "video_id": "q8gXzDksX4M",
+      "date": "2026-10-24",
+      "status": "uploaded"
+    },
+    {
+      "id": "video-02",
+      "title": "I Ran DeepSeek R1 Locally for 7 Days",
+      "thumb": "ZERO CLOUD?",
+      "pillar": "local_llms",
+      "format": "long",
+      "video_id": "6hbMr5p3Bng",
+      "date": "2026-10-24",
+      "status": "uploaded"
+    }
+  ]
+}

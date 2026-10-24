@@ -1,0 +1,9 @@
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/short-01/short-scene-1.png'
+duration 7.92
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/short-01/short-scene-2.png'
+duration 10.60
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/short-01/short-scene-3.png'
+duration 11.95
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/short-01/short-scene-4.png'
+duration 6.50
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/short-01/short-scene-4.png'

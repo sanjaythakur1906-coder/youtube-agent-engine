@@ -1,0 +1,13 @@
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-1-hook.png'
+duration 4.80
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-2-turn.png'
+duration 14.50
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-3-hardware.png'
+duration 21.00
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-4-code-benchmark.png'
+duration 18.00
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-5-the-catch.png'
+duration 12.00
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-6-setup-commands.png'
+duration 8.12
+file '/Users/devbox/Projects/youtube-agent-skill/output/scenes/video-02/scene-6-setup-commands.png'

@@ -1,0 +1,85 @@
+{
+  "topics": [
+    {
+      "id": "claude-code-vs-cursor",
+      "pillar": "coding_agents",
+      "title": "5 Things Claude Code Does That Cursor Cannot",
+      "thumb": "CURSOR KILLER?",
+      "hook": "Before you renew your Cursor subscription, look at what Claude Code did in 7 days.",
+      "formula": "The Warning",
+      "tools_covered": ["claude-code", "cursor", "terminal-cli"],
+      "beats": [
+        {"title": "Hook", "screen": "Terminal CLI vs Cursor IDE split", "duration": 5.0},
+        {"title": "Turn", "screen": "Deep architecture search in terminal", "duration": 15.0},
+        {"title": "Feature 1", "screen": "Automated git commit & PR creation", "duration": 20.0},
+        {"title": "Feature 2", "screen": "Multi-directory autonomous refactoring", "duration": 20.0},
+        {"title": "The Catch", "screen": "Token usage cost breakdown on Sonnet 3.5", "duration": 15.0},
+        {"title": "Payoff", "screen": "Terminal install command and setup guide", "duration": 10.0}
+      ]
+    },
+    {
+      "id": "browser-use-web-agent",
+      "pillar": "python_automation",
+      "title": "I Built a Browser AI Agent in 20 Lines of Python",
+      "thumb": "ZERO CLICKING?",
+      "hook": "Stop scraping websites manually until you see this 20-line Python agent in action.",
+      "formula": "The Mistake",
+      "tools_covered": ["browser-use", "playwright", "python"],
+      "beats": [
+        {"title": "Hook", "screen": "Headless Chromium autonomous login & scraping", "duration": 5.0},
+        {"title": "Turn", "screen": "20 lines of clean Python code in VS Code", "duration": 15.0},
+        {"title": "Demo", "screen": "Live agent filling forms and bypassing popups", "duration": 22.0},
+        {"title": "The Catch", "screen": "CAPTCHA failure logs and API token costs", "duration": 15.0},
+        {"title": "Payoff", "screen": "GitHub repo link and pip install command", "duration": 10.0}
+      ]
+    },
+    {
+      "id": "whisper-offline-subtitles",
+      "pillar": "ai_voice_media",
+      "title": "How to Auto-Transcribe 1 Hour of Audio in 30 Seconds",
+      "thumb": "OFFLINE SPEECH?",
+      "hook": "Before you pay for Otter or Descript, look at how fast Whisper runs locally.",
+      "formula": "The Warning",
+      "tools_covered": ["whisper", "faster-whisper", "python"],
+      "beats": [
+        {"title": "Hook", "screen": "Terminal benchmark showing 1 hour transcribed in 32s", "duration": 5.0},
+        {"title": "Turn", "screen": "faster-whisper GPU acceleration vs cloud APIs", "duration": 15.0},
+        {"title": "Demo", "screen": "Word-level timestamp SRT export in VS Code", "duration": 20.0},
+        {"title": "The Catch", "screen": "Indian accent hallucination and RAM consumption", "duration": 15.0},
+        {"title": "Payoff", "screen": "3 terminal setup commands", "duration": 10.0}
+      ]
+    },
+    {
+      "id": "ollama-open-webui-setup",
+      "pillar": "local_llms",
+      "title": "Turn Any Old Laptop into a Free Private AI Server",
+      "thumb": "PRIVATE CLOUD?",
+      "hook": "Before you throw away your old laptop, look at what it can run with Ollama in 2026.",
+      "formula": "The Warning",
+      "tools_covered": ["ollama", "open-webui", "docker"],
+      "beats": [
+        {"title": "Hook", "screen": "Clean ChatGPT clone UI running on local LAN IP", "duration": 5.0},
+        {"title": "Turn", "screen": "Docker Compose setup for Open-WebUI + Ollama", "duration": 15.0},
+        {"title": "Demo", "screen": "Multi-device access from phone and iPad", "duration": 20.0},
+        {"title": "The Catch", "screen": "Thermal limits and idle RAM consumption", "duration": 15.0},
+        {"title": "Payoff", "screen": "Docker compose one-line command", "duration": 10.0}
+      ]
+    },
+    {
+      "id": "aider-git-ai-pair-programmer",
+      "pillar": "coding_agents",
+      "title": "I Let Aider Code in My Git Repo for 5 Hours",
+      "thumb": "ZERO BUGS?",
+      "hook": "Before you let an AI write git commits, look at what broke in 5 hours.",
+      "formula": "The Warning",
+      "tools_covered": ["aider", "git", "python"],
+      "beats": [
+        {"title": "Hook", "screen": "Automated git commit history with AI messages", "duration": 5.0},
+        {"title": "Turn", "screen": "Aider terminal interface and architect mode", "duration": 15.0},
+        {"title": "Demo", "screen": "Automated test suite creation and fixing lint", "duration": 22.0},
+        {"title": "The Catch", "screen": "Git rebase conflict and runaway token loops", "duration": 15.0},
+        {"title": "Payoff", "screen": "Setup command and config file", "duration": 10.0}
+      ]
+    }
+  ]
+}
