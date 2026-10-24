@@ -38,6 +38,24 @@
       "format": "short",
       "date": "2026-10-24",
       "status": "approved_and_uploaded"
+    },
+    {
+      "id": "release-deepseek-ai-DeepSeek-V3-v1.0.0",
+      "title": "DeepSeek-V3 Just Dropped v1.0.0 (What Broke)",
+      "thumb": "DON'T UPDATE YET?",
+      "pillar": "breaking_news",
+      "format": "short",
+      "date": "2026-10-24",
+      "status": "approved_and_uploaded"
+    }
+  ],
+  "rejected_videos": [
+    {
+      "id": "release-browser-use-browser-use-0.13.13",
+      "title": "browser-use Just Dropped 0.13.13 (What Broke)",
+      "reason": "topic",
+      "date": "2026-10-24",
+      "status": "rejected_skipped"
     }
   ]
 }
